@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProBuds Pro – Premium Wireless Earbuds</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #050508;
+    --white: #f5f5f7;
+    --blue-glow: #00c6ff;
+    --purple: #7b2fff;
+    --mid: #1a1a2e;
+    --card: rgba(255,255,255,0.04);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+    padding: 18px 5%;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(5,5,8,0.7);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .logo {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900; font-size: 1.4rem;
+    background: linear-gradient(90deg, var(--blue-glow), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: rgba(245,245,247,0.65); text-decoration: none;
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 1px;
+    transition: color .3s;
+  }
+  .nav-links a:hover { color: var(--blue-glow); }
+  .nav-cta {
+    padding: 10px 24px; border-radius: 50px;
+    background: linear-gradient(135deg, var(--blue-glow), var(--purple));
+    color: #fff; font-weight: 600; font-size: 0.85rem;
+    cursor: pointer; border: none; letter-spacing: 1px;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .nav-cta:hover { transform: scale(1.05); box-shadow: 0 0 24px rgba(0,198,255,.45); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 120px 5% 80px;
+    position: relative; overflow: hidden;
+  }
+  .bg-orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(90px); pointer-events: none; z-index: 0;
+  }
+  .orb1 { width: 500px; height: 500px; background: rgba(0,198,255,.18); top: -100px; left: -150px; }
+  .orb2 { width: 400px; height: 400px; background: rgba(123,47,255,.2); bottom: -80px; right: -100px; }
+  .orb3 { width: 300px; height: 300px; background: rgba(0,198,255,.1); top: 50%; left: 50%; transform: translate(-50%,-50%); animation: pulse 4s ease-in-out infinite; }
+
+  @keyframes pulse { 0%,100% { transform: translate(-50%,-50%) scale(1); opacity:.6; } 50% { transform: translate(-50%,-50%) scale(1.3); opacity:1; } }
+
+  .hero-badge {
+    display: inline-block; padding: 6px 18px; border-radius: 50px;
+    border: 1px solid rgba(0,198,255,.4);
+    font-size: 0.72rem; letter-spacing: 2px; font-weight: 500;
+    color: var(--blue-glow); margin-bottom: 24px; z-index: 1; position: relative;
+    animation: fadeDown .8s ease both;
+  }
+  .hero-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.8rem, 8vw, 6rem);
+    font-weight: 900; line-height: 1.05;
+    z-index: 1; position: relative;
+    animation: fadeDown .9s .1s ease both;
+  }
+  .hero-title span {
+    background: linear-gradient(90deg, var(--blue-glow), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: 1.1rem; color: rgba(245,245,247,.55); margin-top: 20px;
+    max-width: 520px; line-height: 1.7; z-index: 1; position: relative;
+    animation: fadeDown 1s .2s ease both;
+  }
+
+  /* ── 3D PRODUCT SCENE ── */
+  .product-scene {
+    position: relative; width: 420px; height: 420px;
+    margin: 50px auto 0; z-index: 1;
+    animation: fadeDown 1.1s .3s ease both;
+  }
+  .product-ring {
+    position: absolute; inset: 0; border-radius: 50%;
+    border: 1px solid rgba(0,198,255,.25);
+    animation: spin 8s linear infinite;
+  }
+  .product-ring::before {
+    content: ''; position: absolute; top: -4px; left: 50%;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--blue-glow);
+    box-shadow: 0 0 12px var(--blue-glow);
+    transform: translateX(-50%);
+  }
+  .product-ring2 {
+    position: absolute; inset: 20px; border-radius: 50%;
+    border: 1px solid rgba(123,47,255,.2);
+    animation: spin 12s linear infinite reverse;
+  }
+  .product-img-wrap {
+    position: absolute; inset: 30px;
+    display: flex; align-items: center; justify-content: center;
+    animation: float 4s ease-in-out infinite;
+  }
+  .product-img-wrap img {
+    width: 100%; height: 100%; object-fit: contain;
+    filter: drop-shadow(0 0 55px rgba(0,198,255,.7)) drop-shadow(0 0 25px rgba(123,47,255,.45)) drop-shadow(0 25px 40px rgba(0,0,0,.6));
+    border-radius: 0;
+  }
+  /* glow plate */
+  .glow-plate {
+    position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%);
+    width: 220px; height: 30px;
+    background: radial-gradient(ellipse, rgba(0,198,255,.35) 0%, transparent 70%);
+    filter: blur(8px);
+  }
+
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes fadeDown { from { opacity:0; transform: translateY(-24px); } to { opacity:1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity:0; transform: translateY(30px); } to { opacity:1; transform: translateY(0); } }
+
+  .hero-btns {
+    display: flex; gap: 16px; margin-top: 52px; flex-wrap: wrap; justify-content: center;
+    z-index: 1; position: relative;
+    animation: fadeUp 1s .5s ease both;
+  }
+  .btn-primary {
+    padding: 16px 40px; border-radius: 50px; font-size: 1rem; font-weight: 600;
+    background: linear-gradient(135deg, var(--blue-glow), var(--purple));
+    color: #fff; border: none; cursor: pointer; letter-spacing: 1px;
+    transition: transform .2s, box-shadow .3s;
+    box-shadow: 0 0 30px rgba(0,198,255,.35);
+  }
+  .btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 50px rgba(0,198,255,.55); }
+  .btn-ghost {
+    padding: 16px 40px; border-radius: 50px; font-size: 1rem; font-weight: 600;
+    background: transparent; color: var(--white);
+    border: 1px solid rgba(255,255,255,.2); cursor: pointer; letter-spacing: 1px;
+    transition: border-color .3s, background .3s;
+  }
+  .btn-ghost:hover { border-color: var(--blue-glow); background: rgba(0,198,255,.08); }
+
+  /* ── STATS ── */
+  .stats-bar {
+    display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;
+    padding: 50px 5%; background: rgba(255,255,255,.03);
+    border-top: 1px solid rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Orbitron', sans-serif; font-size: 2.2rem; font-weight: 900;
+    background: linear-gradient(90deg, var(--blue-glow), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .stat-label { font-size: .78rem; color: rgba(245,245,247,.45); letter-spacing: 2px; margin-top: 4px; }
+
+  /* ── FEATURES ── */
+  #features { padding: 100px 5%; }
+  .section-eyebrow {
+    font-size: .72rem; letter-spacing: 3px; color: var(--blue-glow);
+    font-weight: 600; text-align: center; margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: 'Orbitron', sans-serif; font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 900; text-align: center; margin-bottom: 60px; line-height: 1.2;
+  }
+  .features-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px; max-width: 1100px; margin: 0 auto;
+  }
+  .feature-card {
+    background: var(--card); border: 1px solid rgba(255,255,255,.07);
+    border-radius: 20px; padding: 36px 30px;
+    transition: transform .3s, border-color .3s, box-shadow .3s;
+    cursor: default;
+  }
+  .feature-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0,198,255,.4);
+    box-shadow: 0 0 30px rgba(0,198,255,.15);
+  }
+  .feat-icon {
+    font-size: 2.4rem; margin-bottom: 18px; display: block;
+    filter: drop-shadow(0 0 10px rgba(0,198,255,.5));
+  }
+  .feat-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 10px; }
+  .feat-desc { font-size: .88rem; color: rgba(245,245,247,.5); line-height: 1.7; }
+
+  /* ── PRODUCT SHOWCASE ── */
+  #showcase {
+    padding: 100px 5%;
+    background: linear-gradient(180deg, var(--black) 0%, #0a0a1a 50%, var(--black) 100%);
+  }
+  .showcase-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .showcase-img-wrap {
+    position: relative; display: flex; justify-content: center;
+  }
+  .showcase-img-bg {
+    position: absolute; inset: -30px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(0,198,255,.12) 0%, transparent 70%);
+    animation: pulse 5s ease-in-out infinite;
+  }
+  .showcase-img {
+    width: 100%; max-width: 400px; object-fit: contain; position: relative; z-index: 1;
+    filter: drop-shadow(0 0 60px rgba(0,198,255,.4));
+    animation: float 5s ease-in-out infinite;
+  }
+  .showcase-text h2 {
+    font-family: 'Orbitron', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 900; line-height: 1.2; margin-bottom: 20px;
+  }
+  .showcase-text h2 span {
+    background: linear-gradient(90deg, var(--blue-glow), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .showcase-text p { color: rgba(245,245,247,.55); line-height: 1.8; margin-bottom: 30px; }
+  .spec-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .spec-list li {
+    display: flex; align-items: center; gap: 12px;
+    font-size: .9rem; color: rgba(245,245,247,.75);
+  }
+  .spec-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--blue-glow); flex-shrink: 0;
+    box-shadow: 0 0 8px var(--blue-glow);
+  }
+
+  /* ── PRICING ── */
+  #pricing { padding: 100px 5%; }
+  .pricing-cards {
+    display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; max-width: 1000px; margin: 0 auto;
+  }
+  .price-card {
+    background: var(--card); border: 1px solid rgba(255,255,255,.07);
+    border-radius: 24px; padding: 48px 40px; flex: 1 1 260px; max-width: 320px;
+    position: relative; transition: transform .3s;
+  }
+  .price-card:hover { transform: translateY(-8px); }
+  .price-card.featured {
+    border-color: rgba(0,198,255,.5);
+    background: linear-gradient(145deg, rgba(0,198,255,.07), rgba(123,47,255,.07));
+    box-shadow: 0 0 50px rgba(0,198,255,.2);
+  }
+  .price-badge {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    padding: 4px 20px; border-radius: 50px; font-size: .72rem; font-weight: 700;
+    background: linear-gradient(90deg, var(--blue-glow), var(--purple));
+    color: #fff; letter-spacing: 2px; white-space: nowrap;
+  }
+  .price-name { font-weight: 700; font-size: 1rem; letter-spacing: 1px; margin-bottom: 10px; color: rgba(245,245,247,.6); }
+  .price-amount {
+    font-family: 'Orbitron', sans-serif; font-size: 2.6rem; font-weight: 900;
+    margin-bottom: 4px;
+    background: linear-gradient(90deg, var(--blue-glow), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .price-original { font-size: .85rem; color: rgba(245,245,247,.3); text-decoration: line-through; margin-bottom: 24px; }
+  .price-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+  .price-features li { font-size: .88rem; color: rgba(245,245,247,.65); display: flex; gap: 10px; }
+  .price-features li::before { content: '✓'; color: var(--blue-glow); font-weight: 700; }
+  .btn-buy {
+    width: 100%; padding: 15px; border-radius: 50px; font-size: .95rem; font-weight: 600;
+    cursor: pointer; letter-spacing: 1px; border: none; transition: transform .2s, box-shadow .3s;
+  }
+  .btn-buy.grad {
+    background: linear-gradient(135deg, var(--blue-glow), var(--purple));
+    color: #fff; box-shadow: 0 0 24px rgba(0,198,255,.35);
+  }
+  .btn-buy.grad:hover { transform: scale(1.04); box-shadow: 0 0 40px rgba(0,198,255,.5); }
+  .btn-buy.outline {
+    background: transparent; color: var(--white);
+    border: 1px solid rgba(255,255,255,.2);
+  }
+  .btn-buy.outline:hover { border-color: var(--blue-glow); }
+
+  /* ── TESTIMONIALS ── */
+  #reviews { padding: 100px 5%; }
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px; max-width: 1100px; margin: 0 auto;
+  }
+  .review-card {
+    background: var(--card); border: 1px solid rgba(255,255,255,.07);
+    border-radius: 20px; padding: 32px;
+    transition: border-color .3s;
+  }
+  .review-card:hover { border-color: rgba(0,198,255,.3); }
+  .stars { color: #ffd700; font-size: 1.1rem; margin-bottom: 14px; }
+  .review-text { font-size: .9rem; color: rgba(245,245,247,.6); line-height: 1.7; margin-bottom: 20px; }
+  .reviewer { display: flex; align-items: center; gap: 12px; }
+  .rev-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue-glow), var(--purple));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 1rem;
+  }
+  .rev-name { font-weight: 600; font-size: .9rem; }
+  .rev-loc { font-size: .75rem; color: rgba(245,245,247,.4); }
+
+  /* ── CTA SECTION ── */
+  #cta {
+    padding: 120px 5%; text-align: center;
+    background: linear-gradient(135deg, rgba(0,198,255,.06), rgba(123,47,255,.08));
+    border-top: 1px solid rgba(255,255,255,.07); border-bottom: 1px solid rgba(255,255,255,.07);
+  }
+  #cta h2 {
+    font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 900; margin-bottom: 20px; line-height: 1.2;
+  }
+  #cta h2 span {
+    background: linear-gradient(90deg, var(--blue-glow), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  #cta p { color: rgba(245,245,247,.5); font-size: 1.05rem; margin-bottom: 40px; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 50px 5%; text-align: center;
+    border-top: 1px solid rgba(255,255,255,.06);
+  }
+  .footer-logo {
+    font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.6rem;
+    background: linear-gradient(90deg, var(--blue-glow), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+  }
+  .footer-links { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-bottom: 24px; }
+  .footer-links a { color: rgba(245,245,247,.4); text-decoration: none; font-size: .85rem; transition: color .3s; }
+  .footer-links a:hover { color: var(--blue-glow); }
+  .footer-copy { font-size: .8rem; color: rgba(245,245,247,.25); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity .8s, transform .8s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .showcase-inner { grid-template-columns: 1fr; gap: 40px; }
+    .showcase-img-wrap { order: -1; }
+    .stats-bar { gap: 30px; }
+  }
+
+  /* ── PARTICLES ── */
+  #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+  .particle {
+    position: absolute; border-radius: 50%;
+    background: rgba(0,198,255,.6); animation: particleFloat linear infinite;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">PROBUDS</div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#showcase">Specs</a></li>
+    <li><a href="#pricing">Price</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Buy Now</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+  <div class="bg-orb orb3"></div>
+
+  <div class="hero-badge">✦ NEW LAUNCH 2026 ✦</div>
+  <h1 class="hero-title">ProBuds <span>Pro</span></h1>
+  <p class="hero-sub">Crystal-clear sound. Active noise cancellation. Waterproof design. Experience audio like never before.</p>
+
+  <div class="product-scene">
+    <div class="product-ring"></div>
+    <div class="product-ring2"></div>
+    <div class="product-img-wrap">
+      <img src="product_new.png" alt="ProBuds Pro Wireless Earbuds" />
+    </div>
+    <div class="glow-plate"></div>
+  </div>
+
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">🛒 Order Now</button>
+    <button class="btn-ghost" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">See Features</button>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar reveal">
+  <div class="stat"><div class="stat-num" data-target="50">0</div><div class="stat-label">HOUR BATTERY</div></div>
+  <div class="stat"><div class="stat-num" data-target="30">0</div><div class="stat-label">DB NOISE CANCEL</div></div>
+  <div class="stat"><div class="stat-num" data-target="5000">0</div><div class="stat-label">HAPPY CUSTOMERS</div></div>
+  <div class="stat"><div class="stat-num" data-target="10">0</div><div class="stat-label">METER WATERPROOF</div></div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <p class="section-eyebrow reveal">WHY CHOOSE US</p>
+  <h2 class="section-title reveal">World-Class <span style="background:linear-gradient(90deg,#00c6ff,#7b2fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Features</span></h2>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <span class="feat-icon">🔊</span>
+      <div class="feat-title">HD Sound Quality</div>
+      <div class="feat-desc">13mm dynamic drivers deliver deep bass, clear mids, and crisp highs — cinema in your ears.</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feat-icon">🚫</span>
+      <div class="feat-title">Active Noise Cancellation</div>
+      <div class="feat-desc">Advanced ANC technology blocks out 30dB of ambient noise so you can focus fully.</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feat-icon">💧</span>
+      <div class="feat-title">IPX7 Waterproof</div>
+      <div class="feat-desc">Sweat, rain, or splashes — ProBuds Pro handles it all. Made for an active lifestyle.</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feat-icon">⚡</span>
+      <div class="feat-title">Fast Charging</div>
+      <div class="feat-desc">10 minutes of charge gives you 2 hours of playback. Full charge in just 45 minutes.</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feat-icon">🎙️</span>
+      <div class="feat-title">6-Mic ENC Calls</div>
+      <div class="feat-desc">Environmental noise cancellation on calls ensures your voice is always crystal-clear.</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feat-icon">👆</span>
+      <div class="feat-title">Smart Touch Control</div>
+      <div class="feat-desc">Play, pause, skip, answer calls — all with intuitive tap gestures. No buttons needed.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE -->
+<section id="showcase">
+  <div class="showcase-inner">
+    <div class="showcase-img-wrap reveal">
+      <div class="showcase-img-bg"></div>
+      <img class="showcase-img" src="product_new.png" alt="ProBuds Pro Detail" />
+    </div>
+    <div class="showcase-text reveal">
+      <p class="section-eyebrow" style="text-align:left">TECHNICAL SPECS</p>
+      <h2>Engineered for <span>Perfection</span></h2>
+      <p>Every component of ProBuds Pro is precisely tuned — from driver size to antenna placement — for a seamless listening experience.</p>
+      <ul class="spec-list">
+        <li><div class="spec-dot"></div>Bluetooth 5.3 – Range up to 15m</li>
+        <li><div class="spec-dot"></div>13mm Dynamic Drivers</li>
+        <li><div class="spec-dot"></div>ANC + Transparency Mode</li>
+        <li><div class="spec-dot"></div>6 hours + 44 hours (with case)</li>
+        <li><div class="spec-dot"></div>IPX7 Waterproof Rating</li>
+        <li><div class="spec-dot"></div>USB-C + Wireless Charging</li>
+        <li><div class="spec-dot"></div>Voice Assistant Compatible</li>
+        <li><div class="spec-dot"></div>Low Latency Gaming Mode (40ms)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <p class="section-eyebrow reveal">SIMPLE PRICING</p>
+  <h2 class="section-title reveal">Choose Your <span style="background:linear-gradient(90deg,#00c6ff,#7b2fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Pack</span></h2>
+  <div class="pricing-cards">
+    <div class="price-card reveal">
+      <div class="price-name">STANDARD</div>
+      <div class="price-amount">₹799</div>
+      <div class="price-original">₹1,499</div>
+      <ul class="price-features">
+        <li>1x ProBuds Pro Unit</li>
+        <li>Charging Case</li>
+        <li>USB-C Cable</li>
+        <li>3 Ear-tip Sizes</li>
+        <li>7-Day Return Policy</li>
+      </ul>
+      <button class="btn-buy outline" onclick="alert('Order placed! We will contact you soon.')">Order Now</button>
+    </div>
+    <div class="price-card featured reveal">
+      <div class="price-badge">BEST VALUE</div>
+      <div class="price-name">COMBO PACK</div>
+      <div class="price-amount">₹1,399</div>
+      <div class="price-original">₹2,998</div>
+      <ul class="price-features">
+        <li>2x ProBuds Pro Units</li>
+        <li>2x Premium Charging Cases</li>
+        <li>Free Silicone Cover</li>
+        <li>Priority Shipping</li>
+        <li>30-Day Warranty</li>
+        <li>WhatsApp Support</li>
+      </ul>
+      <button class="btn-buy grad" onclick="alert('Combo order placed! We will contact you on WhatsApp.')">Order Combo 🔥</button>
+    </div>
+    <div class="price-card reveal">
+      <div class="price-name">RESELLER</div>
+      <div class="price-amount">₹599</div>
+      <div class="price-original">₹1,499</div>
+      <ul class="price-features">
+        <li>Minimum 10 Units</li>
+        <li>Wholesale Price</li>
+        <li>Dropship Available</li>
+        <li>Marketing Support</li>
+        <li>60-Day Partnership</li>
+      </ul>
+      <button class="btn-buy outline" onclick="alert('Reseller inquiry sent! We will call you shortly.')">Enquire Now</button>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <p class="section-eyebrow reveal">CUSTOMER LOVE</p>
+  <h2 class="section-title reveal">What People <span style="background:linear-gradient(90deg,#00c6ff,#7b2fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Say</span></h2>
+  <div class="reviews-grid">
+    <div class="review-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Sound quality is amazing! I was expecting average quality at this price, but ProBuds Pro completely surprised me. Bass is deep and clear."</p>
+      <div class="reviewer">
+        <div class="rev-avatar">R</div>
+        <div><div class="rev-name">Rahul Sharma</div><div class="rev-loc">Delhi, India</div></div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Waterproof feature actually works! Used it in the gym and even in light rain. Super comfortable fit. Worth every rupee."</p>
+      <div class="reviewer">
+        <div class="rev-avatar">P</div>
+        <div><div class="rev-name">Priya Verma</div><div class="rev-loc">Mumbai, India</div></div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="stars">★★★★☆</div>
+      <p class="review-text">"I ordered the combo pack for me and my brother. Both pieces are working great. Delivery was fast. Highly recommend to everyone."</p>
+      <div class="reviewer">
+        <div class="rev-avatar">A</div>
+        <div><div class="rev-name">Arjun Patel</div><div class="rev-loc">Ahmedabad, India</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <h2 class="reveal">Ready to Upgrade <span>Your Sound?</span></h2>
+  <p class="reveal">Limited stock available. Order now and get free shipping + exclusive discount.</p>
+  <button class="btn-primary reveal" style="font-size:1.1rem;padding:18px 50px" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">🔥 Grab Your ProBuds Now</button>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">PROBUDS PRO</div>
+  <div class="footer-links">
+    <a href="#">Home</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#">Contact</a>
+    <a href="#">Privacy Policy</a>
+  </div>
+  <div class="footer-copy">© 2026 ProBuds Pro. All rights reserved. Made with ❤️ in India.</div>
+</footer>
+
+<script>
+// ── PARTICLE CANVAS ──
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+window.addEventListener('resize', resize); resize();
+
+function Particle() {
+  this.x = Math.random() * W;
+  this.y = Math.random() * H;
+  this.r = Math.random() * 1.5 + 0.5;
+  this.vx = (Math.random() - 0.5) * 0.4;
+  this.vy = (Math.random() - 0.5) * 0.4;
+  this.alpha = Math.random() * 0.5 + 0.1;
+  this.color = Math.random() > 0.5 ? '0,198,255' : '123,47,255';
+}
+
+for (let i = 0; i < 80; i++) particles.push(new Particle());
+
+function drawParticles() {
+  ctx.clearRect(0, 0, W, H);
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${p.color},${p.alpha})`;
+    ctx.fill();
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0 || p.x > W) p.vx *= -1;
+    if (p.y < 0 || p.y > H) p.vy *= -1;
+  });
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+// ── SCROLL REVEAL ──
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+reveals.forEach(el => io.observe(el));
+
+// ── COUNT-UP ANIMATION ──
+function countUp(el, target) {
+  let current = 0;
+  const step = target / 60;
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= target) { current = target; clearInterval(timer); }
+    el.textContent = Math.floor(current).toLocaleString();
+  }, 25);
+}
+const statsObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('[data-target]').forEach(el => {
+        countUp(el, +el.dataset.target);
+      });
+      statsObs.disconnect();
+    }
+  });
+}, { threshold: 0.5 });
+const statsBar = document.querySelector('.stats-bar');
+if (statsBar) statsObs.observe(statsBar);
+
+// ── SMOOTH NAV ACTIVE ──
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY + 100;
+  sections.forEach(s => {
+    const link = document.querySelector(`.nav-links a[href="#${s.id}"]`);
+    if (link) {
+      if (y >= s.offsetTop && y < s.offsetTop + s.offsetHeight) {
+        link.style.color = '#00c6ff';
+      } else { link.style.color = ''; }
+    }
+  });
+});
+</script>
+</body>
+</html>
